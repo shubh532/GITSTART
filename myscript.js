@@ -1,19 +1,13 @@
 let form=document.getElementById("form")
+let ol=document.getElementById("ol")
 
 form.addEventListener("submit",addtoLocalStorage);
 form.addEventListener("submit",showData);
+ol.addEventListener("click", removeData)
+
+
 function addtoLocalStorage(e){
      e.preventDefault();
-    // let name=document.getElementById("name").value
-    // localStorage.setItem("Name",name)
-    // let email=document.getElementById("email").value
-    // localStorage.setItem("Email",email)
-    // let mob=document.getElementById("mob").value
-    // localStorage.setItem("Contact",mob)
-    // let date = document.getElementById("date").value
-    // localStorage.setItem("Date",date)
-    
-    //by creating Object
 
     let user_Details = {
         Name:document.getElementById("name").value,
@@ -34,9 +28,22 @@ function showData(e){
     let details =`${Name} - ${Email} - ${Contact}`
 
 
-    let ol=document.getElementById("ol")
+    
     let li = document.createElement("li")
     li.appendChild(document.createTextNode(details))
     ol.appendChild(li)
     
+    let delBtn=document.createElement("button")
+    delBtn.className="del"
+    delBtn.appendChild(document.createTextNode("Delete"))
+    li.appendChild(delBtn)
+    ol.appendChild(li)
+}
+
+function removeData(e){
+    if (e.target.classList.contains("del")){
+        let li = e.target.parentElement;
+        ol.removeChild(li);
+        localStorage.removeItem(document.getElementById("email").value)
+    }
 }

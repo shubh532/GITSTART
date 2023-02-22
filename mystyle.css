@@ -5,7 +5,7 @@
     margin: auto;
     width: 30%;
     text-align:left;
-    word-wrap: break-word;
+    word-wrap:break-word;
     border-radius: 8px;
 }
 
@@ -42,4 +42,13 @@
 
 #heading{
     text-align: center;
+}
+
+.del{
+    padding: 10px 10px 10px 10px;
+    background-color: rgb(254, 73, 73);
+    border: 2px solid black;
+    border-radius: 8px;
+    margin: 10px 0px 0px 20px;
+    color: aliceblue;
 }
