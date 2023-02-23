@@ -38,6 +38,13 @@ function showData(e){
     delBtn.appendChild(document.createTextNode("Delete"))
     li.appendChild(delBtn)
     ol.appendChild(li)
+
+    let editBtn =document.createElement("button")
+    editBtn.className="del"
+    editBtn.appendChild(document.createTextNode("Edit"))
+    li.appendChild(editBtn)
+    ol.appendChild(li)
+
 }
 
 function removeData(e){
