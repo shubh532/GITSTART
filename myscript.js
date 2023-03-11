@@ -1,6 +1,4 @@
 const submitBtn = document.getElementById("Submit")
-
-
 submitBtn.onclick = (e) => {
     e.preventDefault()
     let data = {
@@ -9,13 +7,16 @@ submitBtn.onclick = (e) => {
         Mob: document.forms["myform"]["mob"].value
 
     }
-    axios.post("https://crudcrud.com/api/b14f414d8f54416c9aaff74e4cb0b078/userData", data)
+
+    axios.post("https://crudcrud.com/api/9caa2de90bf84df7b2d3aad21e14ac63/userData", data)
         .then((response) => {
             showData(response.data)
         })
         .catch(err => {
             document.body.innerHTML += "<h6> SOMETHING WENT WRONG<h6>"
         })
+
+        console.log(data._id)
 
     //berlow cose is to store data in Local Storage
     // let day = prompt("which Days Expense?")
@@ -24,7 +25,7 @@ submitBtn.onclick = (e) => {
 
 }
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/b14f414d8f54416c9aaff74e4cb0b078/userData")
+    axios.get("https://crudcrud.com/api/9caa2de90bf84df7b2d3aad21e14ac63/userData")
         .then((response) => {
             for (let i = 0; i < response.data.length; i++) {
                 showData(response.data[i])
@@ -51,16 +52,16 @@ function showData(data) {
 
     delBtn.onclick = (e) => {
         e.preventDefault()
-        axios.get("https://crudcrud.com/api/b14f414d8f54416c9aaff74e4cb0b078/userData")
-        .then((response)=>{
-            console.log(response.data[0]._id)
-            axios.delete(`https://crudcrud.com/api/b14f414d8f54416c9aaff74e4cb0b078/userData/${response.data[0]._id}`)
-        }) 
+        axios.delete(`https://crudcrud.com/api/9caa2de90bf84df7b2d3aad21e14ac63/userData/${data._id}`)
+        .then(()=>{
+            console.log(data._id)
+            document.getElementById("info").removeChild(li)
+        })
             .catch(err => {
                 console.log(err)
                 document.body.innerHTML += "<h6> SOMETHING WENT WRONG<h6>"
             })
-        document.getElementById("info").removeChild(li)
+        
 
     }
 
@@ -72,9 +73,13 @@ function showData(data) {
 
     editBtn.onclick = (e) => {
         e.preventDefault()
-        localStorage.removeItem(day)
-        document.getElementById("info").removeChild(li)
-        document.getElementById("name").value = day[expense]
-        document.getElementById("gmail").value = day[Description]
+            document.getElementById("name").value = data.Name
+            document.getElementById("gmail").value = data.Gmail
+            document.getElementById("mob").value = data.Mob
+            axios.delete(`https://crudcrud.com/api/9caa2de90bf84df7b2d3aad21e14ac63/userData/${data._id}`)
+            console.log(data._id)
+
+    
+       
     }
 }
