@@ -9,20 +9,31 @@ submitBtn.onclick = (e) => {
         Mob: document.forms["myform"]["mob"].value
 
     }
-    axios.post("https://crudcrud.com/api/b14f414d8f54416c9aaff74e4cb0b078/userData",data)
-    .then((response)=>{
-        showData(response.data)
-    })
-    .catch(err=>{
-        document.body.innerHTML+="<h6> SOMETHING WENT WRONG<h6>"
-    })
+    axios.post("https://crudcrud.com/api/b14f414d8f54416c9aaff74e4cb0b078/userData", data)
+        .then((response) => {
+            showData(response.data)
+        })
+        .catch(err => {
+            document.body.innerHTML += "<h6> SOMETHING WENT WRONG<h6>"
+        })
 
     //berlow cose is to store data in Local Storage
     // let day = prompt("which Days Expense?")
     // localStorage.setItem(day, JSON.stringify(data))
-    
+
 
 }
+window.addEventListener("DOMContentLoaded", () => {
+    axios.get("https://crudcrud.com/api/b14f414d8f54416c9aaff74e4cb0b078/userData")
+        .then((response) => {
+            for (let i = 0; i<response.data.length; i++) {
+                showData(response.data[i])
+            }
+        })
+        .catch(err => {
+            document.body.innerHTML += "<h6> SOMETHING WENT WRONG<h6>"
+        })
+})
 
 function showData(data) {
     let details = `${data.Name}-${data.Gmail}-${data.Mob}`
