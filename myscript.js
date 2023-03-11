@@ -26,7 +26,7 @@ submitBtn.onclick = (e) => {
 window.addEventListener("DOMContentLoaded", () => {
     axios.get("https://crudcrud.com/api/b14f414d8f54416c9aaff74e4cb0b078/userData")
         .then((response) => {
-            for (let i = 0; i<response.data.length; i++) {
+            for (let i = 0; i < response.data.length; i++) {
                 showData(response.data[i])
             }
         })
@@ -51,7 +51,15 @@ function showData(data) {
 
     delBtn.onclick = (e) => {
         e.preventDefault()
-        localStorage.removeItem(day)
+        axios.get("https://crudcrud.com/api/b14f414d8f54416c9aaff74e4cb0b078/userData")
+        .then((response)=>{
+            console.log(response.data[0]._id)
+            axios.delete(`https://crudcrud.com/api/b14f414d8f54416c9aaff74e4cb0b078/userData/${response.data[0]._id}`)
+        }) 
+            .catch(err => {
+                console.log(err)
+                document.body.innerHTML += "<h6> SOMETHING WENT WRONG<h6>"
+            })
         document.getElementById("info").removeChild(li)
 
     }
